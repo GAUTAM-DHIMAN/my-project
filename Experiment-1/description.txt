@@ -1,0 +1,6 @@
+This project is a simple and easy-to-use Student Registration Form built with HTML. It’s designed to collect basic info like a student’s name, email, and age in a clean and straightforward
+way. I used different input types like text, email, and number, and added built-in validation to make sure users enter the right kind of data. For example, the name only allows letters,
+the email must be in the correct format, and the age should be between 1 and 99. Placeholders and tooltips help guide users while filling out the form, making the experience smoother.
+While creating this project i learned many things like how we create heading and how to change there sizes, how can we create user input box where the users can give/fill details, how to add 
+validation to tell the user that they entered the incorrect data as per the required requirements.Overall, this project helped me understand how forms work in HTML and how to make them more
+user-friendly.
