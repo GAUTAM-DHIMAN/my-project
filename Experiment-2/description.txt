@@ -1,0 +1,3 @@
+In this project i created a simple and responsive user interface using HTML and CSS , where i created a layout that displays the user’s balance (starting at $0), Adding two buttons: one for
+"Deposit" and one for "Withdraw" centering everything on the screen using Flexbox and styling the interface to look clean and modern, with shadows, colors, padding, and rounded corners.Making 
+it responsive, so it looks good on both desktop and mobile devices. Using the CSS i coloured the deposit button background green and and withdraw button background red which creates the project more attractive and clean.
