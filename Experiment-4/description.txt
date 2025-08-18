@@ -1,0 +1,50 @@
+This project creates a basic live Character Counter using HTML, CSS and small use of JavaScript.
+It includes a function named showCount() which tracks the count of the letters written inside the textarea(spaces are also included).
+
+
+HTML(BASIC STRUCTURE OF THE WEBPAGE):
+There are only two main tags in html code i.e. div tag and a script tag which holds the javascript function.
+1. <div> tag 
+The <div> tag contains heading "Live Character Counter"
+A textarea tag which is of id txtData and calls the function showCount() when its id is referenced.
+A placeholder is also given to textarea 
+Another <div> tag is made with class name "Counter"
+This <div> tag writes the character count on screen.
+
+2. <script> tag
+The <script> tag is used to write JavaScript inside the HTML page
+A function named showCount() is defined inside <script> tag which runs when called
+The function gets the text from the textare with the help of id="txtData"
+It counts the number of characters typed using value.length
+It updates the element with id="counter" and displays the count.
+
+
+CSS (Styling the Webpage):
+1. body selector
+First we have applied styling on the body tag
+Set fonts to Arial and sans-serif
+Margin is set to 10 px 
+
+2. textarea selector
+Targets the <textarea> element to style it.
+Width is set to 100% to change the size of the text box
+Font size is increased to 18px for better readability
+For comfortable spacing 10px padding is added
+To include padding in total size box-sizing property is used
+
+3. .counter class selector
+Counter text is made bolder using font-weight property
+5px space is added using margin-top for clear visibility
+
+4. .box class selector
+Adds a 2px solid black border around the box.
+Provides 10px padding inside for spacing.
+Creates 20px space below with margin-bottom.
+Limits the width to 500px for a neat layout.
+
+
+
+Learning Outcomes:
+1. Learnt about basics of javascript such as variables, loops, if-else statement
+2. Understanding JavaScript and how to write code in javascript
+3. Understanding how to code in HTML and CSS for making an interactive webpage
