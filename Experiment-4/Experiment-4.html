@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Character Counter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="box">
+        <h2>Live Character Counter</h2>
+        <textarea id="txtData" oninput="showCount()" placeholder="Type something here"></textarea>
+        <div class="counter">
+            Number of Characters:
+            <span id="counter">0</span>
+        </div>
+    </div>
+    <script>
+        function showCount(){
+            var count= document.getElementById("txtData").value.length;
+            document.getElementById("counter").innerText=count;
+        }
+    </script>
+
+</body>
+</html>
