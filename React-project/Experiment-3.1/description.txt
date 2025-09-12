@@ -1,0 +1,110 @@
+# PRODUCT CARD - REACT COMPONENT
+----------------------------------
+## PROJECT OVERVIEW:
+--------------------
+This is a React component called **ProductCard** that displays a list of products with their name, price, and availability status. It demonstrates React fundamentals such as using arrays, mapping over data, conditional rendering, and inline styling for a clean, card-based layout.
+
+## TECHNICAL STACK:
+----------------------
+* React 19.1.1
+* JavaScript (ES6+)
+* JSX
+* Inline CSS Styling
+
+## PROJECT STRUCTURE:
+-----------------------
+src/
+├── App.jsx                  # Main application entry point
+├── main.jsx                 # React DOM rendering
+└── components/
+└── ProductCard.jsx      # Displays product list in card format
+
+## KEY FEATURES:
+-----------------------
+1. PRODUCT LIST DISPLAY
+
+   * Shows product name, price, and stock status
+   * Card-based layout for each product
+   * Product names displayed in bold
+
+2. STOCK STATUS INDICATOR
+
+   * Displays **“In Stock”** or **“Out of Stock”** dynamically
+   * Uses conditional rendering with a boolean `inStock` value
+
+3. RESPONSIVE LAYOUT
+
+   * Uses flexbox for side-by-side product cards
+   * Gap between cards for neat arrangement
+   * Adaptive sizing with `fit-content`
+
+## COMPONENT ARCHITECTURE:
+-----------------------
+* **Functional Component:** Built as a simple React function component
+* **Static Data:** Products stored in an array inside the component
+* **Map Rendering:** `map()` used to loop over products and create cards
+* **Conditional Rendering:** Ternary operator for stock status display
+* **Reusable Structure:** Can be extended for larger product lists
+
+## INITIAL DATA:
+-----------------------
+The component starts with three pre-defined products:
+
+1. Wireless Mouse — \$25.99 (In Stock)
+2. Keyboard — \$45.50 (Out of Stock)
+3. Monitor — \$199.99 (In Stock)
+
+## TECHNICAL IMPLEMENTATION:
+-----------------------
+* **Array Mapping:** Iterates through product list
+* **Conditional Rendering:** Shows stock status based on boolean
+* **Inline CSS:** Used for quick styling of layout and cards
+* **Unique Keys:** Each product card assigned a `key` for React rendering efficiency
+
+## HOW TO RUN:
+-----------------------
+1. Place `ProductCard.jsx` inside the `components/` folder
+2. Import into `App.jsx`:
+
+   ```js
+   import ProductCard from "./components/ProductCard";
+   ```
+3. Run the React app:
+
+   ```bash
+   npm install
+   npm run dev
+   ```
+4. Open in browser at the port shown (default: [http://localhost:5173](http://localhost:5173))
+
+## USAGE INSTRUCTIONS:
+-----------------------
+* The component automatically displays products in card format
+* Stock availability is shown dynamically for each product
+* Can be easily extended by adding more products to the array
+
+## LEARNING OBJECTIVES ACHIEVED:
+-----------------------
+* Understanding functional components in React
+* Using `map()` for dynamic rendering
+* Applying inline styling with JSX
+* Conditional rendering in React
+* Component reusability and modularity
+
+## BROWSER COMPATIBILITY:
+-----------------------
+* Works on all modern browsers supporting ES6+
+* Chrome, Firefox, Safari, Edge
+* Responsive on desktop and mobile
+
+## FUTURE ENHANCEMENTS:
+-----------------------
+* Add product images
+* Include “Add to Cart” functionality
+* Integrate with API for real-time product data
+* Apply CSS modules or styled-components for scalable styling
+* Add filtering and sorting options
+
+This project demonstrates the basics of React components, dynamic rendering, and simple UI structuring with inline styles — a foundational step toward building larger e-commerce applications.
+
+---
