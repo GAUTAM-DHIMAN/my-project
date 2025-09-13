@@ -1,0 +1,96 @@
+# PERSON CLASS HIERARCHY - REACT PROJECT
+
+## PROJECT OVERVIEW:
+
+This is a React-based project demonstrating the concept of **object-oriented programming with inheritance** in JavaScript (ES6 Classes). A base class `Person` is extended into specialized subclasses `Student` and `Teacher`. The project displays the hierarchy in a structured and styled React component, showcasing how inheritance works in real-world scenarios.
+
+## TECHNICAL STACK:
+
+* React 19.1.1
+* Vite (Build Tool)
+* JavaScript (ES6+)
+* CSS3
+* HTML5
+
+## PROJECT STRUCTURE:
+
+src/
+├── App.jsx                      # Main application entry point
+├── main.jsx                     # React DOM rendering
+└── components/
+└── PersonHierarchy.jsx      # Class hierarchy demonstration component
+
+## KEY FEATURES:
+
+1. **CLASS INHERITANCE**
+
+   * `Person` as the base class with properties `name` and `age`.
+   * `Student` subclass adds a `course` property.
+   * `Teacher` subclass adds a `subject` property.
+   * Overridden `displayInfo()` method to show extended details.
+
+2. **REACT COMPONENT DISPLAY**
+
+   * Renders both `Student` and `Teacher` details in styled boxes.
+   * Uses React’s component-based rendering for clean separation.
+
+3. **STYLING**
+
+   * Boxed layout with shadows and rounded corners.
+   * White main heading with dark background.
+   * Black text for content readability.
+   * Flexbox used for side-by-side alignment.
+
+## COMPONENT ARCHITECTURE:
+
+* **MODULAR DESIGN**: Encapsulated `PersonHierarchy` component.
+* **OOP INTEGRATION**: JavaScript classes integrated with React UI.
+* **REUSABILITY**: Base class can be extended for more specialized roles.
+
+## OUTPUT DETAILS:
+
+* Displays a **Student (Gautam, 20, Mathematics)**.
+* Displays a **Teacher (Mr. Harbinder Singh, 40, Full Stack)**.
+* Information shown inside neatly styled UI boxes.
+
+## TECHNICAL IMPLEMENTATION:
+
+* **ES6 Classes**: Demonstrates inheritance and method overriding.
+* **React Functional Component**: Used to render the class outputs.
+* **Inline Styling**: CSS-in-JS applied for quick styling.
+* **Flexbox Layout**: Aligns student and teacher boxes side by side.
+
+## HOW TO RUN:
+
+1. Navigate to the project directory.
+2. Run: `npm install` (if dependencies not installed).
+3. Run: `npm run dev`.
+4. Open browser to `http://localhost:5173` (or the port shown in terminal).
+
+## LEARNING OBJECTIVES ACHIEVED:
+
+* Understanding inheritance in JavaScript ES6 classes.
+* Method overriding with `super()`.
+* Integration of OOP with React components.
+* UI structuring with React and inline CSS.
+* Flexbox-based responsive layout.
+* Clean code organization in a React project.
+
+## BROWSER COMPATIBILITY:
+
+* Modern browsers supporting ES6+.
+* Chrome, Firefox, Safari, Edge.
+* Mobile browsers (responsive layout).
+
+## FUTURE ENHANCEMENTS:
+
+* Add more subclasses like `Admin` or `Parent`.
+* Dynamic input form to create new `Student` or `Teacher` objects.
+* State management to handle multiple persons dynamically.
+* External CSS for cleaner styling.
+* Database or API integration for real-world use cases.
+
+This project highlights the **fusion of OOP principles with React**, helping learners understand how JavaScript classes can be used inside React applications to build structured, maintainable, and reusable code.
+
+---
+
