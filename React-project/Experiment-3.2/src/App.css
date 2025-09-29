@@ -148,37 +148,10 @@
   background-color: #c82333;
 }
 
-.remove-button:active {
-  transform: translateY(1px);
+.card {
+  padding: 2em;
 }
 
-.no-books {
-  text-align: center;
-  color: #666;
-  font-style: italic;
-  padding: 2rem;
-  background-color: #f8f9fa;
-  border-radius: 6px;
-  border: 1px solid #e9ecef;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .add-book-form {
-    flex-direction: column;
-  }
-  
-  .book-input {
-    min-width: 100%;
-  }
-  
-  .book-item {
-    flex-direction: column;
-    gap: 12px;
-    align-items: stretch;
-  }
-  
-  .remove-button {
-    align-self: flex-end;
-  }
+.read-the-docs {
+  color: #888;
 }
