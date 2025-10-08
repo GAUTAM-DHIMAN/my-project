@@ -1,0 +1,145 @@
+**USER MANAGEMENT API WITH AUTHENTICATION AND LOGGING USING EXPRESS.JS**
+
+---
+
+### **1. OBJECTIVE**
+
+To develop a RESTful API using **Express.js** that allows users to perform basic CRUD (Create, Read, Update, Delete) operations on user data.
+The project also demonstrates how to use **middleware** for **request logging** and **Bearer token authentication** to secure specific routes.
+
+---
+
+### **2. FUNCTIONALITY DESCRIPTION**
+
+#### **Server Setup:**
+
+* The server is built using **Express.js** and listens on **port 3000**.
+* `express.json()` middleware is used to parse incoming JSON data from client requests.
+
+---
+
+#### **Middleware Logic:**
+
+1. **Request Logging Middleware:**
+
+   * Logs the HTTP method, request URL, and timestamp.
+   * Helps in tracking incoming requests for debugging and monitoring.
+
+   ```js
+   app.use((req, res, next) => {
+     console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+     next();
+   });
+   ```
+
+2. **Authentication Middleware:**
+
+   * Checks for a valid Bearer token in the `Authorization` header.
+   * If the token is `"Bearer mysecrettoken"`, the request proceeds; otherwise, access is denied with status **403 (Forbidden)**.
+
+   ```js
+   function authMiddleware(req, res, next) {
+     const token = req.headers['authorization'];
+     if (token === 'Bearer mysecrettoken') next();
+     else res.status(403).json({ message: 'Forbidden' });
+   }
+   ```
+
+---
+
+#### **Routes Description:**
+
+1. **POST /users**
+
+   * Adds a new user to an in-memory list.
+   * Response: `{ message: 'User added', user }`
+
+2. **GET /users**
+
+   * Retrieves all users.
+   * Response: Array of all stored users.
+
+3. **PUT /users/:id**
+
+   * Updates user details using the given `id`.
+   * Response: `{ message: 'User updated', updatedUser }`
+
+4. **DELETE /users/:id**
+
+   * Deletes a user by `id`.
+   * Response: `{ message: 'User deleted' }`
+
+---
+
+#### **Admin Router:**
+
+* A **separate router** is created for admin-related routes under `/admin`.
+* The **authMiddleware** protects these routes, ensuring only authorized users can access them.
+* Example routes:
+
+  * `/admin` → Displays “Hello, Chandigarh University!”
+  * `/admin/dashboard` → Displays “Admin dashboard”
+
+---
+
+### **3. FILE STRUCTURE**
+
+* **server.js** → Main Express.js file containing:
+
+  * Middleware setup
+  * Route definitions (`/users` and `/admin`)
+  * Server start function
+
+```plaintext
+server.js
+│
+├── app.use(express.json())            → Parses JSON request bodies
+├── app.use(loggingMiddleware)         → Logs every request
+├── app.post('/users')                 → Adds a user
+├── app.get('/users')                  → Displays all users
+├── app.put('/users/:id')              → Updates user info
+├── app.delete('/users/:id')           → Deletes user
+├── router.get('/dashboard')           → Protected admin dashboard
+└── app.listen(3000)                   → Starts the server
+```
+
+---
+
+### **4. SCENARIO**
+
+This API simulates a **university user management system** where:
+
+* Students’ records can be created, viewed, updated, and deleted.
+* Only authorized admins (with the correct Bearer token) can access admin routes.
+* The logger middleware tracks all user and admin activity for auditing.
+
+For example:
+An admin can log in with a valid token and view the `/admin/dashboard`, while regular users can only perform `/users` CRUD operations.
+
+---
+
+### **5. LEARNING OUTCOMES**
+
+1. Understanding **Express.js middleware** and request flow.
+2. Implementing **Bearer token authentication**.
+3. Performing **CRUD operations** using RESTful routes.
+4. Using **Routers** for better code organization.
+5. Applying **logging techniques** for debugging and monitoring.
+6. Building a **secure and modular backend** using Node.js.
+
+---
+
+### **6. TEST CASES**
+
+| **Test Case**                | **Action**                                         | **Expected Output**                            |
+| ---------------------------- | -------------------------------------------------- | ---------------------------------------------- |
+| 1. Add User                  | POST `/users` with `{ "id": "1", "name": "John" }` | 201 Created – User added                       |
+| 2. Get Users                 | GET `/users`                                       | 200 OK – List of users                         |
+| 3. Update User               | PUT `/users/1` with new details                    | 200 OK – User updated                          |
+| 4. Delete User               | DELETE `/users/1`                                  | 200 OK – User deleted                          |
+| 5. Unauthorized Admin Access | GET `/admin/dashboard` without token               | 403 Forbidden                                  |
+| 6. Authorized Admin Access   | GET `/admin/dashboard` with `Bearer mysecrettoken` | 200 OK – “Admin dashboard”                     |
+| 7. Logging Check             | Make any request                                   | Console should show timestamped method and URL |
+
+---
+
