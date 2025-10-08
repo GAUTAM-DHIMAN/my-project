@@ -1,0 +1,161 @@
+**BANK TRANSFER API WITH JWT AUTHENTICATION AND MONGODB USING EXPRESS.JS**
+
+---
+
+### **1. OBJECTIVE**
+
+To build a secure **bank transfer REST API** using **Express.js**, **MongoDB**, and **JWT authentication**.
+The API allows users to **register, login, and transfer funds** between accounts while ensuring:
+
+* Authentication via JWT tokens.
+* Passwords stored securely using **bcrypt hashing**.
+* Atomic balance checks to prevent overdrafts.
+* Proper error handling for invalid requests and insufficient funds.
+
+---
+
+### **2. FUNCTIONALITY DESCRIPTION**
+
+#### **Environment Setup:**
+
+* MongoDB connection string is defined via `MONGODB_URI`.
+* `JWT_SECRET` is used to sign and verify tokens for authentication.
+* Express server listens on **port 3000**.
+* `express.json()` middleware parses incoming JSON payloads.
+
+---
+
+#### **Database & Schema (MongoDB / Mongoose):**
+
+* **UserSchema** includes:
+
+  * `name` (String, required)
+  * `username` (String, required, unique)
+  * `password` (String, required, hashed with bcrypt)
+  * `balance` (Number, default 0)
+
+* Users are stored in the **`User`** collection.
+
+---
+
+#### **Authentication Middleware (JWT):**
+
+* **verifyToken** middleware:
+
+  * Extracts token from `Authorization` header.
+  * Verifies token validity using `jwt.verify()`.
+  * Attaches decoded user info to `req.user`.
+  * Denies access if token is missing or invalid.
+
+---
+
+#### **Auth Routes:**
+
+1. **POST /register**
+
+   * Registers a new user.
+   * Hashes password using bcrypt.
+   * Sets default or user-specified balance.
+   * Response: User info without password.
+
+2. **POST /login**
+
+   * Validates username and password.
+   * Returns a **JWT token** for authenticated requests.
+   * Response: `{ message, token, userId }`
+
+3. **POST /create-users**
+
+   * Test route to create sample users (Alice and Bob).
+   * Clears previous users for a clean setup.
+   * Returns created users with balances.
+
+---
+
+#### **Core Transfer Route (Protected):**
+
+**POST /transfer** (requires JWT token)
+
+**Flow:**
+
+1. Validate input: `fromUserId`, `toUserId`, and `amount > 0`.
+2. Ensure authenticated user is the sender (`req.user.id`).
+3. **Debit sender** atomically using `findOneAndUpdate` with balance check.
+4. **Credit receiver** using `findByIdAndUpdate`.
+5. Handle errors:
+
+   * Insufficient funds → abort transfer.
+   * Receiver not found → refund sender.
+   * Non-numeric or invalid input → reject.
+6. Return updated balances and success message.
+
+---
+
+#### **Security & Error Handling:**
+
+* Passwords never returned in responses.
+* JWT tokens prevent unauthorized transfers.
+* Atomic debit ensures no overdraft even under concurrent requests.
+* Manual compensation logic refunds sender if receiver update fails.
+
+---
+
+### **3. FILE STRUCTURE**
+
+```plaintext
+server.js
+│
+├── Mongoose connection & User schema
+├── Express app setup (JSON middleware)
+├── JWT middleware (verifyToken)
+├── /register route → Create new user
+├── /login route → Authenticate user & return JWT
+├── /create-users → Test route with sample users
+├── /transfer → Protected route for fund transfers
+└── app.listen(PORT) → Start server
+```
+
+---
+
+### **4. SCENARIO**
+
+This API simulates a **basic banking system**:
+
+* Users can create accounts, login, and perform fund transfers.
+* Only authenticated users can transfer money from their own accounts.
+* Atomic debit and credit operations prevent inconsistent balances.
+* Example:
+
+  * Alice transfers $200 to Bob.
+  * Alice’s balance decreases, Bob’s balance increases.
+  * If Bob’s account is invalid, Alice’s funds are refunded automatically.
+
+---
+
+### **5. LEARNING OUTCOMES**
+
+1. Implement **JWT-based authentication** in a REST API.
+2. Securely store passwords using **bcrypt hashing**.
+3. Perform **atomic updates in MongoDB** to prevent overdraft.
+4. Handle errors in asynchronous database operations.
+5. Protect sensitive routes using middleware.
+6. Apply **basic banking logic** in a web backend environment.
+
+---
+
+### **6. TEST CASES**
+
+| **Test Case**            | **Action**                                                     | **Expected Output**                                 |
+| ------------------------ | -------------------------------------------------------------- | --------------------------------------------------- |
+| 1. Register User         | POST `/register` with name, username, password                 | 201 Created – user info returned (without password) |
+| 2. Login User            | POST `/login` with valid credentials                           | 200 OK – JWT token returned                         |
+| 3. Unauthorized Transfer | POST `/transfer` without JWT                                   | 401 Access denied                                   |
+| 4. Valid Transfer        | POST `/transfer` with JWT and valid fromUserId/toUserId/amount | 200 OK – balances updated                           |
+| 5. Insufficient Funds    | Transfer amount > sender balance                               | 400 – 'Insufficient balance'                        |
+| 6. Invalid Receiver      | Transfer to non-existent toUserId                              | 404 – Sender refunded                               |
+| 7. Create Sample Users   | POST `/create-users`                                           | 201 – Alice and Bob created with balances           |
+| 8. Token Expiry          | Use expired token                                              | 400 – 'Invalid token'                               |
+
+---
+
+This structure ensures a **secure, testable, and modular banking API** suitable for learning real-world backend development with Node.js, Express, MongoDB, JWT, and bcrypt.
