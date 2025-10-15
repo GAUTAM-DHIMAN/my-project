@@ -1,0 +1,132 @@
+**BANK ACCOUNT MANAGEMENT API WITH JWT AUTHENTICATION USING EXPRESS.JS AND MONGODB**
+
+---
+
+### **1. OBJECTIVE**
+
+To develop a secure **banking REST API** using **Express.js**, **MongoDB**, and **JWT (JSON Web Token)** authentication.
+The project allows users to **log in**, **check balance**, **deposit**, and **withdraw money** securely through protected API routes.
+
+---
+
+### **2. FUNCTIONALITY DESCRIPTION**
+
+#### **Server Setup:**
+
+* Built using **Express.js** and runs on **port 3000**.
+* Uses `body-parser` for JSON request parsing and `cors` for cross-origin requests.
+* Connects to a **MongoDB database (`bankApp`)** to store user data.
+* Automatically creates a **default user** if none exists.
+
+---
+
+#### **Authentication Logic (JWT):**
+
+1. **Login Route (`/login`):**
+
+   * Takes `username` and `password` from the request body.
+   * Verifies credentials with the database.
+   * On success, generates a **JWT token** valid for 1 hour using a secret key.
+   * Example response:
+
+     ```json
+     {
+       "message": "Login successful",
+       "token": "your.jwt.token"
+     }
+     ```
+
+2. **Token Verification Middleware:**
+
+   * Checks for the token in the request header (`authorization`).
+   * Verifies the token using the secret key.
+   * Grants access if the token is valid, otherwise returns an error.
+
+---
+
+#### **Routes Description:**
+
+1. **POST /login**
+
+   * Authenticates a user and returns a JWT token.
+   * Request: `{ "username": "user1", "password": "password123" }`
+   * Response: `{ "message": "Login successful", "token": "..." }`
+
+2. **POST /balance (Protected)**
+
+   * Requires a valid token.
+   * Returns the logged-in user’s balance.
+   * Response: `{ "balance": 1000 }`
+
+3. **POST /deposit (Protected)**
+
+   * Adds money to the user’s account.
+   * Request: `{ "amount": 500 }`
+   * Response: `{ "message": "Deposited ₹500", "newBalance": 1500 }`
+
+4. **POST /withdraw (Protected)**
+
+   * Withdraws money from the user’s account (if sufficient balance).
+   * Request: `{ "amount": 300 }`
+   * Response: `{ "message": "Withdrew ₹300", "newBalance": 1200 }`
+
+---
+
+### **3. FILE STRUCTURE**
+
+```plaintext
+server.js
+│
+├── app.use(bodyParser.json())           → Parses incoming JSON requests
+├── app.use(cors())                      → Enables cross-origin requests
+├── mongoose.connect()                   → Connects MongoDB database
+├── User schema                          → Defines username, password, balance
+├── createDefaultUser()                  → Creates default user if missing
+├── /login                               → Generates JWT token
+├── verifyToken()                        → Middleware for JWT verification
+├── /balance                             → Returns current balance
+├── /deposit                             → Deposits amount
+├── /withdraw                            → Withdraws amount
+└── app.listen(3000)                     → Starts the server
+```
+
+---
+
+### **4. SCENARIO**
+
+This API simulates a **simple online banking system** where a registered user can:
+
+* Log in with valid credentials.
+* Use the received **JWT token** to access and manage their account securely.
+* Perform transactions like checking balance, depositing, and withdrawing.
+
+For example:
+A user logs in as `user1` and gets a token. They can then use that token in headers to check balance or deposit/withdraw money.
+
+---
+
+### **5. LEARNING OUTCOMES**
+
+1. Understand **Express.js API development** with route handling.
+2. Learn to connect and interact with **MongoDB** using **Mongoose**.
+3. Implement **JWT-based authentication** for secure route access.
+4. Understand how to use **middleware** for token validation.
+5. Gain knowledge of handling **protected REST endpoints** in Node.js.
+
+---
+
+### **6. TEST CASES**
+
+| **Test Case**              | **Action**                                | **Expected Output**                             |
+| -------------------------- | ----------------------------------------- | ----------------------------------------------- |
+| 1. Login with correct data | POST `/login` with valid credentials      | 200 OK – Returns JWT token                      |
+| 2. Login with wrong data   | POST `/login` with invalid credentials    | 401 Unauthorized – Invalid username or password |
+| 3. Access without token    | POST `/balance` without token             | 403 Forbidden – Token missing                   |
+| 4. Access with valid token | POST `/balance` with valid token          | 200 OK – Shows balance                          |
+| 5. Deposit money           | POST `/deposit` with `{ "amount": 500 }`  | 200 OK – Balance increases by ₹500              |
+| 6. Withdraw money          | POST `/withdraw` with `{ "amount": 200 }` | 200 OK – Balance decreases by ₹200              |
+| 7. Withdraw > balance      | POST `/withdraw` with large amount        | 400 Bad Request – Insufficient balance          |
+| 8. Token expired/invalid   | POST `/balance` with expired token        | 401 Unauthorized – Invalid or expired token     |
+
+---
+
