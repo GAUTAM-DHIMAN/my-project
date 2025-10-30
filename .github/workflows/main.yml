@@ -1,49 +1,30 @@
-name: CI/CD Pipeline
-
+name: React App CI
 on:
   push:
-    branches:
-      - main
-    paths:
-      - cloud-deployment/exp26/**
-
-permissions:
-  contents: write
-
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 jobs:
-  build:
+  build-test:
     runs-on: ubuntu-latest
-
     steps:
-      # Step 1: Checkout code
       - name: Checkout code
         uses: actions/checkout@v4
-
-      # Step 2: Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
-
-      # Step 3: Install dependencies
+          node-version: '20'
+          cache: 'npm'
       - name: Install dependencies
-        run: npm install
-        working-directory: cloud-deployment/exp26
-
-      # Step 4: Run tests
+        run: npm ci
+      - name: Lint code
+        run: npm run lint --if-present
       - name: Run tests
-        run: npm test
-        working-directory: cloud-deployment/exp26
-
-      # Step 5: Build project
-      - name: Build project
+        run: npm test -- --watch=false
+      - name: Build production files
         run: npm run build
-        working-directory: cloud-deployment/exp26
-
-      # Step 6: Deploy to GitHub Pages
-      - name: Deploy to GitHub Pages
-        if: success()
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}   # Fixed
-          publish_dir: ./cloud-deployment/exp26/build # Fixed folder
+          name: react-build
+          path: build
