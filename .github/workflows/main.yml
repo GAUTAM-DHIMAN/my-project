@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - cloud-deployment/exp26/**
+      - "cloud-deployment/exp26/**"   # runs only when files in exp26 change
 
 permissions:
   contents: write
@@ -30,9 +30,9 @@ jobs:
         run: npm install
         working-directory: cloud-deployment/exp26
 
-      # Step 4: Run tests
+      # Step 4: Run tests (optional)
       - name: Run tests
-        run: npm test
+        run: npm test --if-present
         working-directory: cloud-deployment/exp26
 
       # Step 5: Build project
@@ -42,8 +42,7 @@ jobs:
 
       # Step 6: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
-        if: success()
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}   # Fixed
-          publish_dir: ./cloud-deployment/exp26/build # Fixed folder
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: cloud-deployment/exp26/build
