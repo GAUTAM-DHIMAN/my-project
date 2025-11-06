@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 🌈 Custom VORTEX animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); opacity: 0.8; }
+  50% { transform: translateY(-20px); opacity: 1; }
+}
+
+@keyframes float-delay {
+  0%, 100% { transform: translateY(0px); opacity: 0.7; }
+  50% { transform: translateY(25px); opacity: 1; }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-delay {
+  animation: float-delay 7s ease-in-out infinite;
+}
+
+@keyframes glowLine {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.8; }
+}
+
+.animate-glowLine {
+  animation: glowLine 4s ease-in-out infinite;
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, #22d3ee, #3b82f6, #ec4899);
+  -webkit-background-clip: text;
+  color: transparent;
+}
