@@ -1,11 +1,11 @@
 💡 Project Title
 
-AI-Powered Chatbot (Nova) – Intelligent Conversational Assistant using MERN and Gemini API
+AI-Powered Chatbot (VORTEX) – Intelligent Conversational Assistant using MERN and Gemini API
 
 🧠 Objective
 
-To design and integrate an AI-powered chatbot into a full-stack MERN application with a provider-agnostic Node.js backend that can communicate with either Google Gemini API or Dialogflow.
-The chatbot provides dynamic, context-aware responses, supports custom prompts, and maintains conversation history per user.
+To design and implement an AI-powered chatbot integrated into a full-stack MERN application, featuring a provider-agnostic Node.js backend capable of communicating with either Google Gemini API or Dialogflow.
+The chatbot delivers context-aware, dynamic responses, supports custom prompts, and maintains user-specific conversation history.
 
 ⚙️ Tech Stack
 
@@ -15,52 +15,51 @@ Database: MongoDB (Mongoose)
 AI Model: Google Gemini 2.0 / 2.5 Flash via @google/genai SDK
 Environment Management: dotenv
 Communication: Axios
-Styling: Tailwind CSS with custom gradients and glassmorphism
+Styling: Tailwind CSS (with glassmorphism and gradient themes)
 Animation: Framer Motion
 
 🔍 Key Features
+💬 Intelligent AI Responses
 
-💬 Smart AI Responses
+Utilizes Google Gemini API to generate smart, conversational replies.
 
-Uses Google Gemini API to dynamically generate conversational replies.
+Provides predefined fallback responses for common or casual inputs.
 
-Falls back to predefined responses for general or casual inputs.
+🧑‍💻 Message Logging
 
-🧑‍💻 User & Bot Message Logging
+Stores all user and bot messages in MongoDB for persistent chat history.
 
-Stores each user and bot message in MongoDB for session persistence.
-
-Each entry includes timestamps, sender info, and conversation metadata.
+Each message includes timestamps, sender details, and session metadata.
 
 ⚙️ Provider-Agnostic Backend
 
-The Express backend can easily switch between Gemini API or Dialogflow without code restructuring.
+Easily switch between Gemini API or Dialogflow without code changes.
 
-🔐 Secure Environment Setup
+🔐 Secure Environment
 
-API keys stored safely using .env and accessed via process.env.GEMINI_API_KEY.
+API keys stored safely using .env files and accessed through process.env.GEMINI_API_KEY.
 
-🌈 Interactive UI (Nova)
+🌈 Interactive UI (VORTEX)
 
-Responsive and minimal chat interface with animated message bubbles.
+Clean, responsive chat interface with animated message transitions.
 
-Built with TailwindCSS + Framer Motion for smooth transitions and typing feedback.
+Built using TailwindCSS and Framer Motion for smooth visuals and typing indicators.
 
-Glassmorphism theme, gradient buttons, and pulsing background effects.
+Features glassmorphism, gradient buttons, and a pulsing background effect.
 
 ⚡ Optimized Response Handling
 
-Uses a temporary “Nova is thinking…” placeholder while the AI processes requests.
+Displays a “VORTEX is thinking…” placeholder while processing.
 
-Smoothly replaces it with actual output once the response is received.
+Seamlessly replaces it with the generated response once ready.
 
 🧩 Modular Architecture
 
-Clean code separation with controllers, models, routes, and frontend components.
+Organized structure with controllers, routes, models, and React components for scalability.
 
 💾 Session Management
 
-Future-ready for user-specific sessions and message context preservation.
+Future-ready for user authentication and context-based conversations.
 
 🧱 Project Structure
 AI-Chatbot/
@@ -93,32 +92,32 @@ AI-Chatbot/
 
 🚀 How It Works
 
-The user enters a query in the Nova interface.
+The user types a query in the VORTEX chat interface.
 
 The message is sent to the backend API endpoint /bot/v1/message.
 
-The server validates input, logs it, and checks for a predefined reply.
+The server validates the input and logs it into MongoDB.
 
-If no match is found, it uses Gemini API to generate a contextual response.
+If no predefined response is found, Gemini API is invoked to generate an intelligent reply.
 
-The backend saves both user and bot messages in MongoDB.
+Both user and bot messages are stored for persistent session history.
 
-The frontend dynamically displays both messages with smooth animations.
+The frontend dynamically displays messages with smooth animations.
 
 🧩 Future Enhancements
 
-🗣️ Add speech-to-text and text-to-speech features.
+🗣️ Speech-to-Text and Text-to-Speech support.
 
-🌐 Integrate multi-language support (Gemini multilingual models).
+🌐 Multi-language integration using Gemini multilingual models.
 
-🔄 Enable streaming responses (SSE/WebSocket) for real-time word-by-word replies.
+🔄 Streaming responses with SSE or WebSocket for real-time typing effect.
 
-🔐 Add authentication to manage per-user chat history.
+🔐 User authentication for personalized conversation history.
 
-📊 Implement chat analytics dashboard for admin insights.
+📊 Admin dashboard with chat analytics and usage insights.
 
 👨‍💻 Developed By
 
-Suryansh Shandilya
-Under the project: AI-Powered Conversational Bot (Nova)
+Gautam Dhiman
+Under the project: AI-Powered Conversational Bot (VORTEX)
 Built as part of a Machine Learning / AI System Integration practical assignment.
